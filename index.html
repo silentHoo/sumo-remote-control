@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+
+var spaceLocked = {
+  'space': false
+};
+
+var timings = {
+  'space': 5000
+};
+
+document.onkeyup = function(e){
+   //alert(e.which);
+   if (e.which == 37) {
+        $('#left').click();
+    } else if (e.which == 39) {
+        $('#right').click();
+    } else if (e.which == 32) {
+        $('#space').click();
+    } else if (e.which == 40) {
+        $('#below').click();
+    } else if (e.which == 38) {
+        $('#above').click();
+    }
+}
+
+function lockoutSubmit(button) {
+    var id = button.getAttribute('id');
+  if (spaceLocked[id]) {
+      return;
+    }
+    console.log(id + " wurde gedrückt")
+    
+    // Aktion ausführen
+    console.log('Schicke Command an Robot');
+    
+    // internen Zustand anpassen
+    button.setAttribute('disabled', true);
+    spaceLocked[id] = button.getAttribute('disabled');
+    
+    setTimeout(function(){
+        button.removeAttribute('disabled');
+        spaceLocked[id] = false;
+    }, timings[id])
+}
+</script>
+<style>
+
+div.container {
+    width: 100%;
+    border: 1px solid gray;
+}
+
+header {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+   <h1>Jumping Sumo Controller</h1>
+</header>
+<br>
+<center><button id="above" type="button" onclick="lockoutSubmit(this)">above</button>
+<br>
+<br>
+<br>
+<button id="left" type="button" onclick="lockoutSubmit(this)">left</button>
+<button id="space" type="button" onclick="lockoutSubmit(this)">space</button>
+<button id="right" type="button" onclick="lockoutSubmit(this)">right</button>
+<br>
+<br>
+<br>
+<button id="below" type="button" onclick="lockoutSubmit(this)">below</button></center>
+
+
+<center><div style="background-color:white;
+            width:400px;
+            height:200px;
+            padding: 10px;
+            margin: 60px;
+            border:2px black solid;
+">
+<center>Kameraansicht
+</div>
+
+<footer>20.04.2017</footer>
+
+</div>
+
+</body>
+</html>
