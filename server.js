@@ -8,6 +8,14 @@ var http = require('http');
 var url = require('url');
 var fs = require("fs");
 
+/**
+ * To start this server, you just need to do:
+ *
+ *  - npm install
+ *  - node server.js
+ *
+ * All available drone commands are here: https://github.com/forgeByAcision/node-sumo#api
+ */
 http.createServer(function (request, response) {
    var requestUrl = url.parse(request.url);
    console.log("Request path: " + requestUrl.path);
